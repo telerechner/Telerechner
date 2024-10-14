@@ -218,7 +218,7 @@
             </tr>
             <tr>
                 <td class=" firstcol">tägl. Arbeitszeit</td>
-                <td><input type="text" inputmode="decimal" id="normalDailyHours" value="8.01" maxlength="6"></td>
+                <td><input type="text" inputmode="decimal" id="normalDailyHours" value="8,01" maxlength="6"></td>
                 <td id="prHours2" class="optimal-result"></td>
             </tr>
             <tr>
@@ -453,7 +453,7 @@
             limitInputRange(input);
             selectAllOnFocus(input);
         });
-        
+
         // Eventlistener fuer manuelle Inputs Monat 2
         document.getElementById('prHours2').addEventListener('input', function() {
             this.dataset.manuallySet = 'true';
