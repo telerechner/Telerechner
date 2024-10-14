@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Telerechner by CG</title>
+
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,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">
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: system-ui, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 2;
+            white-space: nowrap;
+            background-color: #333333;
+            color: #ffffff;
+            margin: 0; /* Standardrand entfernen */
+        }
+        
+        .table-container {
+            padding: 0px 5px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto; /* Alles zentrieren, wenn Container < Screen */
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            font-size: 20px;
+            margin: 0; /* Oben unten 5px, links rechts 0px Rand */
+            padding-left: 0; /* Padding links entfernen */
+            align-self: flex-start;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        
+        table {
+            table-layout: fixed;
+            overflow: hidden;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 3px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            border: 2px solid #444;
+        }
+        
+        th {
+            font-weight: bold;
+            padding: 0px 7px 0px 0px;
+            text-align: right;
+            width: fit-content;
+            max-width: fit-content;
+            background-color: #444;
+        }
+        
+        td {
+            padding: 5px;
+            text-align: right;
+            width: 1%;
+            max-width: fit-content;
+            line-height: 1.5;
+            white-space: nowrap;
+        }
+
+        input[type="number"] {
+            font-size: 16px;
+            width: 100%;
+            min-width: 20px;
+            max-width: 60px;
+            max-width: fit-content;
+            background-color: #444;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 3px;
+            padding: 2px 2px;
+            text-align: center;
+            box-sizing: border-box;
+            text-indent: 0.01px;
+        }
+
+        select[type="percent"] {
+            font-size: 16px;
+            width: 100%;
+            min-width: 20px;
+            max-width: 70px;
+            background-color: #444;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 3px;
+            padding: 2px 2px;
+            text-align: center;
+            box-sizing: border-box;
+            text-indent: 0.01px;
+            text-overflow: '';
+            /* DD-Pfeil entfernen */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* Fuer Internet Explorer */
+            &::-ms-expand {
+                display: none;
+            }
+        }
+
+        .optimal-result {
+            width: fit-content;
+            max-width: 180px;
+            background-color: #444;
+            text-align: right;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+
+        .result {
+            width: fit-content;
+            max-width: 65px;
+            font-weight: bold;
+            text-align: right;
+            background-color: #444;
+            padding-right: 10px;
+        }
+        
+        .firstcol {
+            text-align: left;
+            padding:  5px 0px 5px 5px;
+        }
+        /* #resultsTable td:not(:first-child) {
+            text-align: right;
+            } */
+
+        #resetButton {
+            padding: 20px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 400px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .copyright {
+            width: 100%;
+            max-width: 400px;
+            padding: 0 5px;
+            box-sizing: border-box;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table-container">
+        <h1>Telerechner</h1>
+        <table>
+            <colgroup>
+                <col style="width: 40%;">
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+                <col style="width: 20%;">
+            </colgroup>
+            <tr>
+                <th class=" firstcol">Eingabe</th>
+                <th>Monat 1</th>
+                <th>Monat 2</th>
+                <th class="result">Gesamt</th>
+            </tr>
+            <tr>
+                <td class=" firstcol">Arbeitstage</td>
+                <td><input type="number" id="workDays1" placeholder="0" step="1" min="0" max="99.99"></td>
+                <td><input type="number" id="workDays2" placeholder="0" step="1" min="0" max="99.99"></td>
+                <td id="totalWorkDays" class="result"></td>
+            </tr>
+            <tr>
+            <tr>
+                <td class=" firstcol">Officestunden</td>
+                <td><input type="number" id="officeHours1Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
+                <td><input type="number" id="officeHours2Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
+                <td id="officeHours12Inp" class="result"></td>
+            </tr>
+            <tr>
+                <td class=" firstcol">Telestunden</td>
+                <td><input type="number" id="telHours1Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
+                <td><input type="number" id="telHours2Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
+                <td id="telHours12Inp" class="result"></td>
+            </tr>
+            <tr class="result">
+                <td class=" firstcol">Gesamt</td>
+                <td type="number" id="totalHoursMonth1" class="result"></td>
+                <td type="number" id="totalHoursMonth2" class="result"></td>
+                <td id="totalHours" class="result"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="table-container">
+        <table>
+            <colgroup>
+                <col style="width: 40%;">
+                <col style="width: 20%;">
+                <col style="width: 40%;">
+            </colgroup>
+            <tr>
+                <th class=" firstcol">Grundwerte</th>
+                <th style="width: 70px; max-width: 70px;"></th>
+                <th class="optimal-result">Monat 2 Optimum</th>
+            </tr>
+            <tr>
+                <td class=" firstcol">tägl. Arbeitszeit</td>
+                <td><input type="number" id="normalDailyHours" value="8.01" step="0.01" min="0" max="10.00"></td>
+                <td id="prHours2" class="optimal-result"></td>
+            </tr>
+            <tr>
+                <td class=" firstcol">Teleanteil</td>
+                <td>
+                    <select type="percent" id="telePercent" >
+                        <option value="60">60%</option>
+                        <option value="80">80%</option>
+                    </select>
+                </td>
+                <td id="telHours2" class="optimal-result"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="table-container">
+        <table id="resultsTable">
+            <!-- JS Ergebnisse -->
+        </table>
+    </div>
+    <div class="table-container">
+        <button id="resetButton">Zurücksetzen</button>
+    </div>
+    <div class="copyright">
+        © 2024 Christian G. All rights reserved.
+    </div>
+    <script>
+        function adjustFontSize() {
+            const cells = document.querySelectorAll('th, tr, td, .result, .optimal-result, .copyright');
+            cells.forEach(cell => {
+                let fontSize = 16; // Default
+                cell.style.fontSize = fontSize + 'px';
+                while (cell.scrollWidth > cell.offsetWidth && fontSize > 6) {
+                    fontSize--;
+                    cell.style.fontSize = fontSize + 'px';
+                }
+            });
+        }
+        
+        function limitInputRange(input) {
+            let maxValue;
+            if (input.id.includes('Days')) {
+                maxValue = 99.99;
+            } else if (input.id.includes('Daily')) {
+                maxValue = 10.00;
+            } else {
+                maxValue = 999.99;
+            }
+            
+            // Apply limit immediately
+            if (parseFloat(input.value) > maxValue) {
+                input.value = maxValue.toFixed(2);
+            }
+            
+            input.addEventListener('input', function() {
+                let value = parseFloat(this.value);
+                if (isNaN(value)) {
+                    this.value = '';
+                } else if (value > maxValue) {
+                    this.value = maxValue.toFixed(2);
+                } else {
+                    // Only fix to 2 decimal places if there's a decimal point
+                    this.value = this.value.includes('.') ? value.toFixed(2) : value.toString();
+                }
+            });
+        }
+
+        function calculateHours() {
+            // Inputs abrufen
+            const workDays1 = parseFloat(document.getElementById('workDays1').value) || 0;
+            const workDays2 = parseFloat(document.getElementById('workDays2').value) || 0;
+            const totalWorkDays = workDays1 + workDays2;
+            const officeHours1Inp = parseFloat(document.getElementById('officeHours1Inp').value) || 0;
+            const officeHours2Inp = parseFloat(document.getElementById('officeHours2Inp').value) || 0;
+            const officeHours12Inp = officeHours1Inp + officeHours2Inp;
+            const telHours1Inp = parseFloat(document.getElementById('telHours1Inp').value) || 0;
+            const telHours2Inp = parseFloat(document.getElementById('telHours2Inp').value) || 0;
+            const telHours12Inp = telHours1Inp + telHours2Inp;
+            const totalHoursMonth1 = telHours1Inp + officeHours1Inp;
+            const totalHoursMonth2 = telHours2Inp + officeHours2Inp;
+            const totalHours = totalHoursMonth1 + totalHoursMonth2;
+            const normalDailyHours = parseFloat(document.getElementById('normalDailyHours').value) || 8.01;
+            const telePercent = parseFloat(document.getElementById('telePercent').value);
+
+            // Monat 2 span Elemente abrufen
+            const prHours2Span = document.getElementById('prHours2');
+            const telHours2Span = document.getElementById('telHours2');
+
+            // Erwartungswerte
+            const expectedTotalHours1 = workDays1 * normalDailyHours;
+            const expectedTotalHours2 = workDays2 * normalDailyHours;
+            const expectedTotalHours12 = (workDays1 + workDays2) * normalDailyHours;
+            // Anteile
+            const percentOfficeHours1 = officeHours1Inp / (officeHours1Inp + telHours1Inp) * 100 || 0;
+            const percentOfficeHours2 = officeHours2Inp / (officeHours2Inp + telHours2Inp) * 100 || 0;
+            const percentTeleHours1 = telHours1Inp / (officeHours1Inp + telHours1Inp) * 100 || 0;
+            const percentTeleHours2 = telHours2Inp / (officeHours2Inp + telHours2Inp) * 100 || 0;
+            
+            // Optimale Stundenverteilung fuer Monat 2 berechnen
+            const targetTeleHours = (totalHoursMonth1 + expectedTotalHours2) * (telePercent / 100);
+            const remainingTeleHours = Math.max(0, targetTeleHours - telHours1Inp); // Math.max damit keine Werte unter Null angezeigt werden
+            const optimalTelHours2 = Math.min(expectedTotalHours2, remainingTeleHours);// Math.min falls Monat 1 schon Gesamtsoll erfüllt
+            const optimalPrHours2 = Math.max(0, expectedTotalHours2 - optimalTelHours2);
+            
+            // Monat 2 span Elemente mit Optimalwerten updaten
+            document.getElementById('prHours2').textContent = 'Office: ' + formatNumber(optimalPrHours2) + 'h';
+            document.getElementById('telHours2').textContent = 'Tele: ' + formatNumber(optimalTelHours2) + 'h';
+            
+            const prHours2 = optimalPrHours2;
+            const telHours2 = optimalTelHours2;
+            
+            // Summen in Eingabetabelle updaten
+            document.getElementById('totalWorkDays').textContent = formatNumber(totalWorkDays);
+            document.getElementById('officeHours12Inp').textContent = formatNumber(officeHours12Inp) + 'h';
+            document.getElementById('telHours12Inp').textContent = formatNumber(telHours12Inp) + 'h';
+            document.getElementById('totalHoursMonth1').textContent = formatNumber(totalHoursMonth1) + 'h';
+            document.getElementById('totalHoursMonth2').textContent = formatNumber(totalHoursMonth2) + 'h';
+            document.getElementById('totalHours').textContent = formatNumber(totalHours) + 'h';
+            
+            const expectedHomeHours = expectedTotalHours12 * (telePercent / 100);
+            
+            // Abweichungen
+            const teleDays1 = telHours1Inp / normalDailyHours || 0;
+            const teleDays12 = expectedHomeHours / normalDailyHours || 0;
+            const teleDays2 = teleDays12 - teleDays1 || 0;
+            const diffHours1 = telHours1Inp - expectedTotalHours1;
+            const diffHours2 = telHours2 - expectedTotalHours2;
+            const diffHours12 = (telHours1Inp + telHours2) - expectedTotalHours12;
+            const diffPercentOfficeHours = (officeHours1Inp + officeHours2Inp) / totalHours * 100 || 0;
+            const diffPercentTeleHours = (telHours1Inp + telHours2Inp) / totalHours * 100 || 0;
+            
+            // Resultate updaten
+            const resultsHtml = `
+                <colgroup>
+                    <col style="width: 40%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <tr>
+                    <td class=" firstcol">Regelarbeitszeit</td>
+                    <td>${formatNumber(expectedTotalHours1)}h</td>
+                    <td>${formatNumber(expectedTotalHours2)}h</td>
+                    <td class="result">${formatNumber(expectedTotalHours12)}h</td>
+                </tr>
+                <tr>
+                    <td class=" firstcol">Diff. zu RAZ</td>
+                    <td>${formatNumber(diffHours1)}h</td>
+                    <td>${formatNumber(diffHours2)}h</td>
+                    <td class="result">${formatNumber(diffHours12)}h</td>
+                </tr>
+                <tr>
+                    <td class=" firstcol">Officeanteil</td>
+                    <td>${formatNumber(percentOfficeHours1)}%</td>
+                    <td>${formatNumber(percentOfficeHours2)}%</td>
+                    <td class="result">${formatNumber(diffPercentOfficeHours)}%</td>
+                </tr>
+                <tr>
+                    <td class=" firstcol">Teleanteil</td>
+                    <td>${formatNumber(percentTeleHours1)}%</td>
+                    <td>${formatNumber(percentTeleHours2)}%</td>
+                    <td class="result">${formatNumber(diffPercentTeleHours)}%</td>
+                </tr>
+                <tr class="result">
+                    <td class=" firstcol">Teletage</td>
+                    <td class="result">${formatNumber(teleDays1)}</td>
+                    <td class="result">${formatNumber(teleDays2)}</td>
+                    <td class="result">${formatNumber(teleDays12)}</td>
+                </tr>
+            `;
+
+            document.getElementById('resultsTable').innerHTML = `
+                <tr>
+                    <th class=" firstcol">Resultat</th>
+                    <th>Monat 1</th>
+                    <th>Monat 2</th>
+                    <th class="result">Gesamt</th>
+                </tr>
+                ${resultsHtml}
+            `;
+            adjustFontSize();
+        }
+
+        // Dezimalzeichen ersetzen
+        function formatNumber(num) {
+            return num.toFixed(2).replace('.', ',');
+        }
+
+        function resetCalculator() {
+            // Fokus aus Inputfeldern nehmen
+            document.activeElement.blur();
+            // Inputfelder resetten
+            document.getElementById('workDays1').value = '';
+            document.getElementById('workDays2').value = '';
+            document.getElementById('officeHours1Inp').value = '';
+            document.getElementById('telHours1Inp').value = '';
+            document.getElementById('officeHours2Inp').value = '';
+            document.getElementById('telHours2Inp').value = '';
+            // Optimalwerte resetten
+            document.getElementById('prHours2').textContent = '0,00';
+            document.getElementById('telHours2').textContent = '0,00';
+            // Regelarbeitszeit resetten
+            document.getElementById('normalDailyHours').value = '8.01';
+            // Teleanteil auf 60% resetten
+            document.getElementById('telePercent').value = '60';
+            // manuelle Flag fuer Monat 2 ersetzen
+            document.getElementById('prHours2').dataset.manuallySet = '';
+            document.getElementById('telHours2').dataset.manuallySet = '';
+
+            // Neuberechnung
+            calculateHours();
+            // Wenn Button in Formular, unterdrueckt return false die Uebermittlung
+            return false;
+        }
+
+        // Eventlistener fuer Inputs
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', calculateHours);
+        });
+
+        // Eventlistener fuer manuelle Inputs Monat 2
+        document.getElementById('prHours2').addEventListener('input', function() {
+            this.dataset.manuallySet = 'true';
+        });
+        document.getElementById('telHours2').addEventListener('input', function() {
+            this.dataset.manuallySet = 'true';
+        });
+
+        // Wenn workDays2 geaendert wird, manuelle Flag fuer Monat 2 ersetzen
+        document.getElementById('workDays2').addEventListener('input', function() {
+            document.getElementById('prHours2').dataset.manuallySet = '';
+            document.getElementById('telHours2').dataset.manuallySet = '';
+        });
+
+        // Limiter fuer Inputranges
+        document.querySelectorAll('input[type="number"]').forEach(limitInputRange);
+
+        // Touchendevent fuer Mobilgeraete
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('touchend', function() {
+                setTimeout(calculateHours, 0);
+            });
+        });
+
+        // Eventlistener fuer Fontgroessenanpassung
+        window.addEventListener('load', adjustFontSize);
+        window.addEventListener('resize', adjustFontSize);
+
+        // Eventlistener fuer Resetbutton
+        document.getElementById('resetButton').addEventListener('click', resetCalculator);
+        document.getElementById('resetButton').addEventListener('touchend', function(e) {
+            e.preventDefault(); // Default Touchverhalten unterdruecken
+            resetCalculator();
+        });
+
+        calculateHours();
+    </script>
+</body>
+</html>
