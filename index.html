@@ -179,21 +179,21 @@
             </tr>
             <tr>
                 <td class=" firstcol">Arbeitstage</td>
-                <td><input type="number" id="workDays1" placeholder="0" step="1" min="0" max="99.99"></td>
-                <td><input type="number" id="workDays2" placeholder="0" step="1" min="0" max="99.99"></td>
+                <td><input type="number" id="workDays1" placeholder="0" step="1" min="0" max="29.99"></td>
+                <td><input type="number" id="workDays2" placeholder="0" step="1" min="0" max="29.99"></td>
                 <td id="totalWorkDays" class="result"></td>
             </tr>
             <tr>
             <tr>
                 <td class=" firstcol">Officestunden</td>
-                <td><input type="number" id="officeHours1Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
-                <td><input type="number" id="officeHours2Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
+                <td><input type="number" id="officeHours1Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
+                <td><input type="number" id="officeHours2Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
                 <td id="officeHours12Inp" class="result"></td>
             </tr>
             <tr>
                 <td class=" firstcol">Telestunden</td>
-                <td><input type="number" id="telHours1Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
-                <td><input type="number" id="telHours2Inp" placeholder="0" step="0.01" min="0" max="999.99"></td>
+                <td><input type="number" id="telHours1Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
+                <td><input type="number" id="telHours2Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
                 <td id="telHours12Inp" class="result"></td>
             </tr>
             <tr class="result">
@@ -218,7 +218,7 @@
             </tr>
             <tr>
                 <td class=" firstcol">tägl. Arbeitszeit</td>
-                <td><input type="number" id="normalDailyHours" value="8.01" step="0.01" min="0" max="10.00"></td>
+                <td><input type="number" id="normalDailyHours" value="8.01" step="0.01" min="0" max="9.99"></td>
                 <td id="prHours2" class="optimal-result"></td>
             </tr>
             <tr>
@@ -260,11 +260,11 @@
         function limitInputRange(input) {
             let maxValue;
             if (input.id.includes('Days')) {
-                maxValue = 99.99;
+                maxValue = 29.99;
             } else if (input.id.includes('Daily')) {
-                maxValue = 10.00;
+                maxValue = 9.99;
             } else {
-                maxValue = 999.99;
+                maxValue = 299.99;
             }
             
             // Apply limit immediately
@@ -280,7 +280,7 @@
                     this.value = maxValue.toFixed(2);
                 } else {
                     // Only fix to 2 decimal places if there's a decimal point
-                    this.value = this.value.includes('.') ? value.toFixed(2) : value.toString();
+                    this.value = this.value.includes('.') ? value.toFixed(2) : value.formatNumber();
                 }
             });
         }
