@@ -258,14 +258,6 @@
         }
         
         function limitInputRange(input) {
-            let maxValue;
-            if (input.id.includes('Days')) {
-                maxValue = 29.99;
-            } else if (input.id.includes('Daily')) {
-                maxValue = 9.99;
-            } else {
-                maxValue = 299.99;
-            }
 
             input.addEventListener('input', function(e) {
                 let cursorPosition = this.selectionStart;
@@ -290,13 +282,6 @@
                 }
 
                 let value = parseFloat(inputValue.replace(',', '.'));
-                if (isNaN(value)) {
-                    this.value = inputValue;
-                } else if (value > maxValue) {
-                    this.value = formatNumber(maxValue);
-                } else {
-                    this.value = inputValue;
-                }
 
                 // Restore cursor position
                 this.setSelectionRange(cursorPosition, cursorPosition);
@@ -304,9 +289,6 @@
 
             // Initial check
             let initialValue = parseFloat(input.value.replace(',', '.'));
-            if (!isNaN(initialValue) && initialValue > maxValue) {
-                input.value = formatNumber(maxValue);
-            }
         }
 
         function formatNumber(num) {
@@ -456,11 +438,22 @@
             return false;
         }
 
+        function selectAllOnFocus(input) {
+            input.addEventListener('focus', function() {
+                // Use setTimeout to ensure this runs after the default focus behavior
+                setTimeout(() => {
+                    this.select();
+                }, 0);
+            });
+        }
+
         // Eventlistener fuer Inputs
         document.querySelectorAll('input, select').forEach(input => {
             input.addEventListener('input', calculateHours);
+            limitInputRange(input);
+            selectAllOnFocus(input);
         });
-
+        
         // Eventlistener fuer manuelle Inputs Monat 2
         document.getElementById('prHours2').addEventListener('input', function() {
             this.dataset.manuallySet = 'true';
@@ -474,9 +467,6 @@
             document.getElementById('prHours2').dataset.manuallySet = '';
             document.getElementById('telHours2').dataset.manuallySet = '';
         });
-
-        // Limiter fuer Inputranges
-        document.querySelectorAll('input[type="number"]').forEach(limitInputRange);
 
         // Touchendevent fuer Mobilgeraete
         document.querySelectorAll('input, select').forEach(input => {
