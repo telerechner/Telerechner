@@ -70,7 +70,7 @@
             white-space: nowrap;
         }
 
-        input[type="number"] {
+        input[type="text"] {
             font-size: 16px;
             width: 100%;
             min-width: 20px;
@@ -179,21 +179,21 @@
             </tr>
             <tr>
                 <td class=" firstcol">Arbeitstage</td>
-                <td><input type="number" id="workDays1" placeholder="0" step="1" min="0" max="29.99"></td>
-                <td><input type="number" id="workDays2" placeholder="0" step="1" min="0" max="29.99"></td>
+                <td><input type="text" inputmode="decimal" id="workDays1" placeholder="0" maxlength="6"></td>
+                <td><input type="text" inputmode="decimal" id="workDays2" placeholder="0" maxlength="6"></td>
                 <td id="totalWorkDays" class="result"></td>
             </tr>
             <tr>
             <tr>
                 <td class=" firstcol">Officestunden</td>
-                <td><input type="number" id="officeHours1Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
-                <td><input type="number" id="officeHours2Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
+                <td><input type="text" inputmode="decimal" id="officeHours1Inp" placeholder="0" maxlength="6"></td>
+                <td><input type="text" inputmode="decimal" id="officeHours2Inp" placeholder="0" maxlength="6"></td>
                 <td id="officeHours12Inp" class="result"></td>
             </tr>
             <tr>
                 <td class=" firstcol">Telestunden</td>
-                <td><input type="number" id="telHours1Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
-                <td><input type="number" id="telHours2Inp" placeholder="0" step="0.01" min="0" max="299.99"></td>
+                <td><input type="text" inputmode="decimal" id="telHours1Inp" placeholder="0" maxlength="6"></td>
+                <td><input type="text" inputmode="decimal" id="telHours2Inp" placeholder="0" maxlength="6"></td>
                 <td id="telHours12Inp" class="result"></td>
             </tr>
             <tr class="result">
@@ -218,7 +218,7 @@
             </tr>
             <tr>
                 <td class=" firstcol">tägl. Arbeitszeit</td>
-                <td><input type="number" id="normalDailyHours" value="8.01" step="0.01" min="0" max="9.99"></td>
+                <td><input type="text" inputmode="decimal" id="normalDailyHours" value="8.01" maxlength="6"></td>
                 <td id="prHours2" class="optimal-result"></td>
             </tr>
             <tr>
@@ -266,41 +266,69 @@
             } else {
                 maxValue = 299.99;
             }
-            
-            // Apply limit immediately
-            if (parseFloat(input.value) > maxValue) {
-                input.value = maxValue.toFixed(2);
-            }
-            
-            input.addEventListener('input', function() {
-                let value = parseFloat(this.value);
-                if (isNaN(value)) {
-                    this.value = '';
-                } else if (value > maxValue) {
-                    this.value = maxValue.toFixed(2);
-                } else {
-                    // Only fix to 2 decimal places if there's a decimal point
-                    this.value = this.value.includes('.') ? value.toFixed(2) : value.formatNumber();
+
+            input.addEventListener('input', function(e) {
+                let cursorPosition = this.selectionStart;
+                let inputValue = this.value.replace(',', '.');
+
+                // Remove any non-digit characters except the first dot
+                inputValue = inputValue.replace(/[^\d,]/g, '');
+                let commaIndex = inputValue.indexOf(',');
+                if (commaIndex !== -1) {
+                    inputValue = inputValue.slice(0, commaIndex + 1) + 
+                                inputValue.slice(commaIndex + 1).replace(/,/g, '');
                 }
+
+                // Limit to 6 characters total (including comma)
+                if (inputValue.length > 6) {
+                    inputValue = inputValue.slice(0, 6);
+                }
+
+                // Ensure no more than 2 decimal places
+                if (commaIndex !== -1 && inputValue.length - commaIndex > 3) {
+                    inputValue = inputValue.slice(0, commaIndex + 3);
+                }
+
+                let value = parseFloat(inputValue.replace(',', '.'));
+                if (isNaN(value)) {
+                    this.value = inputValue;
+                } else if (value > maxValue) {
+                    this.value = formatNumber(maxValue);
+                } else {
+                    this.value = inputValue;
+                }
+
+                // Restore cursor position
+                this.setSelectionRange(cursorPosition, cursorPosition);
             });
+
+            // Initial check
+            let initialValue = parseFloat(input.value.replace(',', '.'));
+            if (!isNaN(initialValue) && initialValue > maxValue) {
+                input.value = formatNumber(maxValue);
+            }
+        }
+
+        function formatNumber(num) {
+            return num.toFixed(2).replace('.', ',');
         }
 
         function calculateHours() {
             // Inputs abrufen
-            const workDays1 = parseFloat(document.getElementById('workDays1').value) || 0;
-            const workDays2 = parseFloat(document.getElementById('workDays2').value) || 0;
+            const workDays1 = parseFloat(document.getElementById('workDays1').value.replace(',', '.')) || 0;
+            const workDays2 = parseFloat(document.getElementById('workDays2').value.replace(',', '.')) || 0;
             const totalWorkDays = workDays1 + workDays2;
-            const officeHours1Inp = parseFloat(document.getElementById('officeHours1Inp').value) || 0;
-            const officeHours2Inp = parseFloat(document.getElementById('officeHours2Inp').value) || 0;
+            const officeHours1Inp = parseFloat(document.getElementById('officeHours1Inp').value.replace(',', '.')) || 0;
+            const officeHours2Inp = parseFloat(document.getElementById('officeHours2Inp').value.replace(',', '.')) || 0;
             const officeHours12Inp = officeHours1Inp + officeHours2Inp;
-            const telHours1Inp = parseFloat(document.getElementById('telHours1Inp').value) || 0;
-            const telHours2Inp = parseFloat(document.getElementById('telHours2Inp').value) || 0;
+            const telHours1Inp = parseFloat(document.getElementById('telHours1Inp').value.replace(',', '.')) || 0;
+            const telHours2Inp = parseFloat(document.getElementById('telHours2Inp').value.replace(',', '.')) || 0;
             const telHours12Inp = telHours1Inp + telHours2Inp;
             const totalHoursMonth1 = telHours1Inp + officeHours1Inp;
             const totalHoursMonth2 = telHours2Inp + officeHours2Inp;
             const totalHours = totalHoursMonth1 + totalHoursMonth2;
-            const normalDailyHours = parseFloat(document.getElementById('normalDailyHours').value) || 8.01;
-            const telePercent = parseFloat(document.getElementById('telePercent').value);
+            const normalDailyHours = parseFloat(document.getElementById('normalDailyHours').value.replace(',', '.')) || 8.01;
+            const telePercent = parseFloat(document.getElementById('telePercent').value.replace(',', '.'));
 
             // Monat 2 span Elemente abrufen
             const prHours2Span = document.getElementById('prHours2');
@@ -399,11 +427,6 @@
                 ${resultsHtml}
             `;
             adjustFontSize();
-        }
-
-        // Dezimalzeichen ersetzen
-        function formatNumber(num) {
-            return num.toFixed(2).replace('.', ',');
         }
 
         function resetCalculator() {
